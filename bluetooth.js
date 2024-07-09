@@ -1,6 +1,9 @@
 async function discoverDevices(debug = false) {
     try {
-        const options = { acceptAllDevices: true };
+        const options = {
+            acceptAllDevices: true,
+            optionalServices: ['95494af2-7100-441e-9ba1-b7d4c4a0253d'] // Replace with your service UUID
+        };
         if (debug) console.log('Requesting devices with options: ', options);
         const device = await navigator.bluetooth.requestDevice(options);
         if (debug) console.log('Discovered device: ', device);
