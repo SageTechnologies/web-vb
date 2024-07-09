@@ -2,7 +2,7 @@ async function discoverDevice(debug = false) {
     try {
         const options = {
             filters: [
-                { services: ['your-service-uuid'] } // Replace with your service UUID
+                { services: ['95494af2-7100-441e-9ba1-b7d4c4a0253d'] } // Replace with your service UUID
             ]
         };
         if (debug) console.log('Requesting device with options: ', options);
