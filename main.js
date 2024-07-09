@@ -24,9 +24,9 @@ async function displayDevices(devices, debug = false) {
         deviceList.appendChild(listItem);
 
         try {
-            const hasService = await checkDeviceForService(device, '95494af2-7100-441e-9ba1-b7d4c4a0253d', debug); // Replace with your service UUID
-            checkMark.textContent = hasService ? ' ✓' : ' ✗';
-            checkMark.classList.add('checkmark');
+            const { hasService, serviceUUIDs } = await checkDeviceForService(device, '95494af2-7100-441e-9ba1-b7d4c4a0253d', debug); // Replace with your service UUID
+            checkMark.textContent = ` (${hasService ? '✓' : '✗'}, Services: ${serviceUUIDs.join(', ')})`;
+            checkMark.classList.add(hasService ? 'checkmark' : 'crossmark');
             listItem.addEventListener('click', async () => {
                 await handleDevice(device, debug);
             });

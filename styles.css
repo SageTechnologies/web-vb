@@ -32,3 +32,8 @@ label {
     color: green;
     font-weight: bold;
 }
+
+.crossmark {
+    color: red;
+    font-weight: bold;
+}

@@ -1,5 +1,3 @@
-//'95494af2-7100-441e-9ba1-b7d4c4a0253d'
-
 async function discoverDevices(debug = false) {
     try {
         const options = { acceptAllDevices: true };
@@ -17,10 +15,11 @@ async function checkDeviceForService(device, serviceUuid, debug = false) {
     try {
         const server = await device.gatt.connect();
         const services = await server.getPrimaryServices();
-        const hasService = services.some(service => service.uuid === serviceUuid);
+        const serviceUUIDs = services.map(service => service.uuid);
+        const hasService = serviceUUIDs.includes(serviceUuid);
         await server.disconnect();
-        if (debug) console.log(`Device ${device.name} has service ${serviceUuid}: ${hasService}`);
-        return hasService;
+        if (debug) console.log(`Device ${device.name} has services: ${serviceUUIDs.join(', ')}`);
+        return { hasService, serviceUUIDs };
     } catch (error) {
         if (debug) console.error('Error checking for service: ', error);
         throw error;
@@ -72,4 +71,3 @@ async function communicateWithDevice(characteristic, debug = false) {
         throw error;
     }
 }
-
