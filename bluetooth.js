@@ -17,7 +17,15 @@ async function discoverDevices(debug = false) {
 async function checkDeviceForService(device, serviceUuid, debug = false) {
     try {
         const server = await device.gatt.connect();
+        if (debug) console.log('Connected to GATT server');
+        
         const services = await server.getPrimaryServices();
+        if (debug) console.log('Primary services: ', services.map(s => s.uuid));
+
+        if (services.length === 0) {
+            throw new Error('No services found in device.');
+        }
+
         const serviceUUIDs = services.map(service => service.uuid);
         const hasService = serviceUUIDs.includes(serviceUuid);
         await server.disconnect();
@@ -28,6 +36,7 @@ async function checkDeviceForService(device, serviceUuid, debug = false) {
         throw error;
     }
 }
+
 
 async function connectToDevice(device, debug = false) {
     try {
@@ -44,10 +53,10 @@ async function connectToDevice(device, debug = false) {
 
 async function discoverServices(server, debug = false) {
     try {
-        const service = await server.getPrimaryService('your-service-uuid'); // Replace with your service UUID
+        const service = await server.getPrimaryService('95494af2-7100-441e-9ba1-b7d4c4a0253d'); // Replace with your service UUID
         if (debug) console.log('Discovered service: ', service);
-        const characteristic = await service.getCharacteristic('your-characteristic-uuid'); // Replace with your characteristic UUID
-        if (debug) console.log('Discovered characteristic: ', characteristic);
+        //const characteristic = await service.getCharacteristic('your-characteristic-uuid'); // Replace with your characteristic UUID
+        //if (debug) console.log('Discovered characteristic: ', characteristic);
         document.getElementById('status').innerText += '\nService and characteristic discovered';
         await communicateWithDevice(characteristic, debug);
     } catch (error) {
