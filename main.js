@@ -1,15 +1,9 @@
-document.getElementById('discover-button').addEventListener('click', async () => {
+document.getElementById('discover-button').addEventListener('click', () => {
     const debug = document.getElementById('debug-checkbox').checked;
-    try {
-        const devices = await discoverDevices(debug);
-        displayDevices(devices, debug);
-    } catch (error) {
-        console.error('Error: ', error);
-        document.getElementById('status').innerText = `Error: ${error.message}`;
-    }
+    discoverDevices(debug);
 });
 
-async function displayDevices(devices, debug = false) {
+function displayDevices(devices, debug = false) {
     const deviceList = document.getElementById('device-list');
     deviceList.innerHTML = '';
 
