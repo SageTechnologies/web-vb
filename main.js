@@ -17,14 +17,15 @@ async function displayDevices(devices, debug = false) {
         const listItem = document.createElement('li');
         listItem.textContent = device.name || 'Unnamed Device';
 
+        const uuids = device.uuids ? device.uuids.join(', ') : 'No UUIDs available';
         const checkMark = document.createElement('span');
-        checkMark.textContent = ` (Services: ${device.uuids.join(', ')})`;
+        checkMark.textContent = ` (Services: ${uuids})`;
         listItem.appendChild(checkMark);
         
         deviceList.appendChild(listItem);
 
         if (debug) {
-            console.log(`Device: ${device.name}, UUIDs: ${device.uuids.join(', ')}`);
+            console.log(`Device: ${device.name}, UUIDs: ${uuids}`);
         }
     }
 }
