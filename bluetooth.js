@@ -30,10 +30,10 @@ async function connectToDevice(device, debug = false) {
 
 async function discoverServices(server, debug = false) {
     try {
-        const service = await server.getPrimaryService('your-service-uuid'); // Replace with your service UUID
+        const service = await server.getPrimaryService('95494af2-7100-441e-9ba1-b7d4c4a0253d'); // Replace with your service UUID
         if (debug) console.log('Discovered service: ', service);
-        const characteristic = await service.getCharacteristic('your-characteristic-uuid'); // Replace with your characteristic UUID
-        if (debug) console.log('Discovered characteristic: ', characteristic);
+        //const characteristic = await service.getCharacteristic('your-characteristic-uuid'); // Replace with your characteristic UUID
+        //if (debug) console.log('Discovered characteristic: ', characteristic);
         document.getElementById('status').innerText += '\nService and characteristic discovered';
         await communicateWithDevice(characteristic, debug);
     } catch (error) {
