@@ -14,6 +14,14 @@
                 const serverLink = document.createElement('div');
                 serverLink.innerHTML = `Server = <a href="${decodeURIComponent(server)}" target="_blank">${decodeURIComponent(server)}</a>`;
                 document.body.prepend(serverLink);
+
+                // Add two lines after the server link
+                const line1 = document.createElement('div');
+                line1.innerHTML = '&nbsp;';
+                const line2 = document.createElement('div');
+                line2.innerHTML = '&nbsp;';
+                document.body.prepend(line2);
+                document.body.prepend(line1);
             }
         });
     </script>
